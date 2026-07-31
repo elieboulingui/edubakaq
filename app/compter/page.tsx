@@ -93,12 +93,12 @@ export default function BakaComptagePage() {
         grandsNombres: true,
     });
 
-    const toggleSection = (section:any) => {
-        setExpandedSections(prev => ({
-            ...prev,
-            [section]: !prev[section]
-        }));
-    };
+const toggleSection = (section: keyof typeof expandedSections) => {
+    setExpandedSections(prev => ({
+        ...prev,
+        [section]: !prev[section]
+    }));
+};
 
     const handleSearch = (text) => {
         setSearchNumber(text);
