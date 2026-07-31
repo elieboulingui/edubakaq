@@ -1,15 +1,22 @@
-// app/dictionnaire-baka/page.js
+// app/page.tsx
 'use client';
 
 import { useCallback, useEffect, useState } from 'react';
 import Image from 'next/image';
 import BottomMenu from '@/components/BottomMenu';
 
+// Définition du type pour les entrées du dictionnaire
+type DictionnaireEntry = {
+  francais: string;
+  baka: string;
+  phonetique: string;
+};
+
 export default function DictionnaireBaka() {
-  const [isClient, setIsClient] = useState(false);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [filteredDictionnaire, setFilteredDictionnaire] = useState([]);
-  const [activeTab, setActiveTab] = useState('dictionnaire');
+  const [isClient, setIsClient] = useState<boolean>(false);
+  const [searchTerm, setSearchTerm] = useState<string>('');
+  const [filteredDictionnaire, setFilteredDictionnaire] = useState<DictionnaireEntry[]>([]);
+  const [activeTab, setActiveTab] = useState<string>('dictionnaire');
 
   useEffect(() => {
     setIsClient(true);
@@ -17,7 +24,7 @@ export default function DictionnaireBaka() {
     setFilteredDictionnaire(currentData);
   }, [activeTab]);
 
-  const speakMot = useCallback((mot) => {
+  const speakMot = useCallback((mot: DictionnaireEntry) => {
     if (!isClient || !window.speechSynthesis) return;
 
     const preferred = mot?.baka && String(mot.baka).trim() ? String(mot.baka).trim() : '';
@@ -60,7 +67,7 @@ export default function DictionnaireBaka() {
   }, [searchTerm, activeTab]);
 
   // Données du dictionnaire
-  const dictionnaire = [
+  const dictionnaire: DictionnaireEntry[] = [
     { francais: "accoucher", baka: "djoudjou", phonetique: "dʒudʒu" },
     { francais: "accepter", baka: "maye", phonetique: "majɛ" },
     { francais: "affaire", baka: "Nâmè", phonetique: "nɑmɛ" },
@@ -298,7 +305,7 @@ export default function DictionnaireBaka() {
     { francais: "voler", baka: "nzi", phonetique: "nzi" }
   ];
 
-  const phrases = [
+  const phrases: DictionnaireEntry[] = [
     { francais: "bonjour (général)", baka: "Méfoukwe", phonetique: "mefukwɛ" },
     { francais: "bonjour (je te dis)", baka: "Me broukwe", phonetique: "mɛ brukwɛ" },
     { francais: "bonjour (je vous dis)", baka: "Yi à Djoukwe", phonetique: "ji a dʒukwɛ" },
