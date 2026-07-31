@@ -3,45 +3,93 @@
 import { useState, useEffect } from 'react';
 
 export default function PWAInstall() {
-  const [prompt, setPrompt] = useState<any>(null);
-  const [show, setShow] = useState(false);
+  const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
+  const [showButton, setShowButton] = useState(false);
+  const [isInstalled, setIsInstalled] = useState(false);
 
   useEffect(() => {
-    // Capturer l'événement beforeinstallprompt
-    const handler = (e: Event) => {
+    // Vérifier si déjà installé
+    if (window.matchMedia('(display-mode: standalone)').matches) {
+      setIsInstalled(true);
+      return;
+    }
+
+    // Écouter l'événement d'installation
+    const handleBeforeInstallPrompt = (e: Event) => {
       e.preventDefault();
-      setPrompt(e);
-      setShow(true);
+      setDeferredPrompt(e);
+      setShowButton(true);
+      console.log('✅ beforeinstallprompt déclenché !');
     };
 
-    window.addEventListener('beforeinstallprompt', handler);
+    // Installation réussie
+    const handleAppInstalled = () => {
+      console.log('✅ Application installée !');
+      setIsInstalled(true);
+      setShowButton(false);
+      setDeferredPrompt(null);
+    };
 
-    // Afficher quand même après 3 secondes (debug)
-    setTimeout(() => setShow(true), 3000);
+    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+    window.addEventListener('appinstalled', handleAppInstalled);
 
-    return () => window.removeEventListener('beforeinstallprompt', handler);
+    // Si pas d'événement après 5 secondes, afficher quand même
+    const timer = setTimeout(() => {
+      if (!deferredPrompt && !isInstalled) {
+        console.log('⚠️ beforeinstallprompt non déclenché');
+        setShowButton(true);
+      }
+    }, 5000);
+
+    return () => {
+      window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+      window.removeEventListener('appinstalled', handleAppInstalled);
+      clearTimeout(timer);
+    };
   }, []);
 
-  const install = async () => {
-    if (prompt) {
-      prompt.prompt();
-      const { outcome } = await prompt.userChoice;
-      console.log(outcome === 'accepted' ? '✅ Installée' : '❌ Refusée');
-      setPrompt(null);
+  const handleInstallClick = async () => {
+    if (deferredPrompt) {
+      try {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        console.log(`Résultat : ${outcome}`);
+        setDeferredPrompt(null);
+        setShowButton(false);
+      } catch (err) {
+        console.error('Erreur installation:', err);
+      }
     } else {
-      alert('Installation non disponible. Vérifiez :\n- HTTPS\n- manifest.json\n- Service Worker');
+      // Instructions manuelles
+      alert(
+        '📱 Pour installer l\'application :\n\n' +
+        'Android Chrome : Menu ⋮ → "Installer l\'application"\n\n' +
+        'iPhone/iPad Safari : Bouton Partager → "Sur l\'écran d\'accueil"\n\n' +
+        'PC Chrome : Barre d\'adresse → Icône ⊕\n\n' +
+        'Si l\'option n\'apparaît pas :\n' +
+        '- Vérifiez que vous êtes en HTTPS\n' +
+        '- Attendez quelques secondes\n' +
+        '- Rafraîchissez la page'
+      );
     }
-    setShow(false);
   };
 
-  if (!show) return null;
+  if (isInstalled || !showButton) return null;
 
   return (
-    <div className="fixed bottom-20 left-4 right-4 z-50 bg-green-500 text-white p-4 rounded-xl shadow-lg flex items-center justify-between">
-      <span className="font-bold">📱 Installer l'app</span>
-      <button onClick={install} className="bg-white text-green-600 px-4 py-2 rounded-lg font-bold">
-        Installer
-      </button>
+    <div className="fixed bottom-20 left-4 right-4 z-50">
+      <div className="bg-green-500 text-white p-4 rounded-xl shadow-lg flex items-center justify-between">
+        <div>
+          <p className="font-bold">📱 Dictionnaire Baka</p>
+          <p className="text-sm text-white/80">Installer l'application</p>
+        </div>
+        <button
+          onClick={handleInstallClick}
+          className="bg-white text-green-600 px-4 py-2 rounded-lg font-bold hover:bg-gray-100"
+        >
+          Installer
+        </button>
+      </div>
     </div>
   );
 }
