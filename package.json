@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "generate-icons": "node scripts/generate-icons.js",
+    "pwa-build": "npm run generate-icons && npm run build",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"
@@ -20,6 +22,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.12",
+    "sharp": "^0.35.3",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
