@@ -1,4 +1,4 @@
-// app/baka-culture/page.js
+// app/baka-culture/page.tsx
 'use client';
 
 import React, { useState, useEffect } from 'react';
@@ -6,13 +6,56 @@ import Image from 'next/image';
 import Link from 'next/link';
 import BottomMenu from '@/components/BottomMenu';
 
-const BakaCulturePage = () => {
-    const [isCreditsVisible, setIsCreditsVisible] = useState(false);
-    const [isVocabulaireVisible, setIsVocabulaireVisible] = useState(false);
-    const [isNomenclatureVisible, setIsNomenclatureVisible] = useState(false);
-    const [isZoomVisible, setIsZoomVisible] = useState(false);
+// Définition des types
+type ExpandedSections = {
+    joursSemaine: boolean;
+    moisSaisons: boolean;
+    histoireVillages: boolean;
+    peche: boolean;
+    pecheChasse: boolean;
+    difficultes: boolean;
+    routes: boolean;
+    education: boolean;
+    economie: boolean;
+    actesNaissance: boolean;
+    vocabulaire: boolean;
+};
 
-    const [isAdVisible, setIsAdVisible] = useState(true);
+type VocabulaireItem = {
+    francais: string;
+    phonetique: string;
+    transcription: string;
+};
+
+type VocabulaireCategories = {
+    pronoms_personnels: VocabulaireItem[];
+    expressions_importantes: VocabulaireItem[];
+    couleurs: VocabulaireItem[];
+};
+
+type NomenclatureItem = {
+    nom_baka: string;
+    signification: string;
+    correspondance_fang: string;
+};
+
+type RouteImage = {
+    id: string;
+    src: string;
+};
+
+type RouteVideo = {
+    id: string;
+    src: string;
+};
+
+const BakaCulturePage = () => {
+    const [isCreditsVisible, setIsCreditsVisible] = useState<boolean>(false);
+    const [isVocabulaireVisible, setIsVocabulaireVisible] = useState<boolean>(false);
+    const [isNomenclatureVisible, setIsNomenclatureVisible] = useState<boolean>(false);
+    const [isZoomVisible, setIsZoomVisible] = useState<boolean>(false);
+
+    const [isAdVisible, setIsAdVisible] = useState<boolean>(true);
 
     useEffect(() => {
         setIsAdVisible(true);
@@ -27,7 +70,7 @@ const BakaCulturePage = () => {
         };
     }, []);
 
-    const [expandedSections, setExpandedSections] = useState({
+    const [expandedSections, setExpandedSections] = useState<ExpandedSections>({
         joursSemaine: false,
         moisSaisons: false,
         histoireVillages: false,
@@ -41,19 +84,19 @@ const BakaCulturePage = () => {
         vocabulaire: false
     });
 
-    const routeImages = [
+    const routeImages: RouteImage[] = [
         { id: '1', src: '/images/WhatsApp Image 2025-12-24 at 15.35.02.jpeg' },
         { id: '2', src: '/images/WhatsApp Image 2025-12-24 at 15.35.05.jpeg' },
         { id: '3', src: '/images/WhatsApp Image 2025-12-24 at 15.35.07.jpeg' },
     ];
 
-    const routeVideos = [
+    const routeVideos: RouteVideo[] = [
         { id: '1', src: '/videos/WhatsApp Video 2025-12-24 at 13.36.11.mp4' },
         { id: '2', src: '/videos/WhatsApp Video 2025-12-24 at 13.36.17.mp4' },
         { id: '3', src: '/videos/WhatsApp Video 2025-12-24 at 13.19.20.mp4' },
     ];
 
-    const vocabulaireBaka = {
+    const vocabulaireBaka: { categories: VocabulaireCategories } = {
         categories: {
             pronoms_personnels: [
                 { "francais": "Je", "phonetique": "MA/MÉ", "transcription": "ma/me" },
@@ -81,7 +124,7 @@ const BakaCulturePage = () => {
         }
     };
 
-    const tableauNomenclature = {
+    const tableauNomenclature: { titre_figure: string; donnees_tableau: NomenclatureItem[] } = {
         titre_figure: "Figure 64 : Tableau de la double nomenclature ethnique baka et des correspondances fang",
         donnees_tableau: [
             { nom_baka: "ékuambe", signification: "petit éléphant qui marche seul", correspondance_fang: "éssabok de Bolossoville, jémekak" },
@@ -112,7 +155,7 @@ const BakaCulturePage = () => {
         ]
     };
 
-    const toggleSection = (sectionName) => {
+    const toggleSection = (sectionName: keyof ExpandedSections) => {
         setExpandedSections(prev => ({
             ...prev,
             [sectionName]: !prev[sectionName]
@@ -120,7 +163,7 @@ const BakaCulturePage = () => {
     };
 
     // Composant ZoomableImage
-    const ZoomableImage = ({ onClose }) => {
+    const ZoomableImage = ({ onClose }: { onClose: () => void }) => {
         return (
             <div className="fixed inset-0 z-50 bg-black flex flex-col">
                 <div className="flex justify-end items-center px-5 pt-12 pb-5 bg-black/80">
@@ -149,7 +192,17 @@ const BakaCulturePage = () => {
     };
 
     // Modal générique
-    const Modal = ({ isOpen, onClose, title, children }) => {
+    const Modal = ({ 
+        isOpen, 
+        onClose, 
+        title, 
+        children 
+    }: { 
+        isOpen: boolean; 
+        onClose: () => void; 
+        title: string; 
+        children: React.ReactNode 
+    }) => {
         if (!isOpen) return null;
         return (
             <div
@@ -663,7 +716,7 @@ const BakaCulturePage = () => {
                         <h3 className="text-lg font-bold text-gray-800 mb-3 border-b-2 border-green-500 pb-1">Couleurs</h3>
                         <div className="flex flex-wrap justify-between mb-4">
                             {vocabulaireBaka.categories.couleurs.map((couleur, index) => {
-                                const getBackgroundColor = (colorName) => {
+                                const getBackgroundColor = (colorName: string): string => {
                                     switch (colorName.toLowerCase()) {
                                         case 'jaune': return 'bg-amber-100';
                                         case 'rouge': return 'bg-red-100';
@@ -675,7 +728,7 @@ const BakaCulturePage = () => {
                                         default: return 'bg-gray-100';
                                     }
                                 };
-                                const getTextColor = (colorName) => colorName.toLowerCase() === 'noir' ? 'text-white' : 'text-black';
+                                const getTextColor = (colorName: string): string => colorName.toLowerCase() === 'noir' ? 'text-white' : 'text-black';
                                 return (
                                     <div key={index} className={`w-[48%] p-4 rounded-lg mb-3 items-center border border-gray-200 shadow-sm text-center ${getBackgroundColor(couleur.francais)}`}>
                                         <p className={`text-sm font-bold mb-1 ${getTextColor(couleur.francais)}`}>{couleur.francais}</p>
