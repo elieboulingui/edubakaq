@@ -1,5 +1,5 @@
 // app/layout.tsx
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import BottomMenu from "@/components/BottomMenu";
@@ -14,6 +14,15 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
+
+// Configuration du viewport séparée (Next.js 14+)
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  themeColor: '#4CAF50',
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://votre-domaine.com'),
@@ -30,13 +39,6 @@ export const metadata: Metadata = {
     telephone: true,
   },
   manifest: '/manifest.json',
-  themeColor: '#4CAF50',
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-    maximumScale: 1,
-    userScalable: false, // Changé de 'no' à false
-  },
   appleWebApp: {
     capable: true,
     title: 'Dictionnaire Baka',
@@ -110,23 +112,6 @@ export default function RootLayout({
         <meta name="theme-color" content="#4CAF50" />
         <meta name="msapplication-TileColor" content="#4CAF50" />
         <meta name="msapplication-TileImage" content="/icons/icon-144x144.png" />
-
-        {/* Service Worker */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.register('/sw.js')
-                  .then(function(reg) {
-                    console.log('Service Worker enregistré !');
-                  })
-                  .catch(function(err) {
-                    console.log('Erreur d\\'enregistrement du Service Worker : ', err);
-                  });
-              }
-            `,
-          }}
-        />
       </head>
       <body className="min-h-full flex flex-col">
         {children}
