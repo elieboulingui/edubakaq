@@ -1,12 +1,38 @@
-// app/proverbes-expressions-baka/page.js
+// app/proverbe/page.tsx
 'use client';
 
 import React, { useState } from 'react';
 import BottomMenu from '@/components/BottomMenu';
 
+// Définition des types
+type ExpressionBaka = {
+    id: number;
+    francais: string;
+    original: string;
+    phonetique: string;
+};
+
+type NoteDiverse = {
+    id: number;
+    text: string;
+};
+
+type Proverbe = {
+    id: number;
+    francais: string;
+    baka: string;
+    explication: string;
+};
+
+type ExpandedSections = {
+    expressions: boolean;
+    notes: boolean;
+    about: boolean;
+    proverbes: boolean;
+};
 
 // 👉 Données complètes des expressions Baka
-const expressionsBaka = [
+const expressionsBaka: ExpressionBaka[] = [
     { id: 1, francais: "J'aime", original: "YEMOU", phonetique: "jemu" },
     { id: 2, francais: "Il t'aime", original: "É YEMOU", phonetique: "e jemu" },
     { id: 3, francais: "Bonjour (je te dis bonjour)", original: "ME DJOUKWÈ", phonetique: "mə dzukwe" },
@@ -62,7 +88,7 @@ const expressionsBaka = [
 ];
 
 // 👉 Notes diverses
-const notesDiverses = [
+const notesDiverses: NoteDiverse[] = [
     { id: 1, text: "Le baka est une langue parlée par les Pygmées d'Afrique centrale." },
     { id: 2, text: "La langue baka utilise des tons pour distinguer les mots." },
     { id: 3, text: "Le peuple Baka vit principalement dans la forêt tropicale." },
@@ -72,7 +98,7 @@ const notesDiverses = [
 ];
 
 // 👉 Proverbes Baka
-const proverbes = [
+const proverbes: Proverbe[] = [
     {
         id: 1,
         francais: 'La machette ne peut pas couper quelque chose seule.',
@@ -124,14 +150,14 @@ const aboutEdubaka = {
 };
 
 export default function BakaNotesPage() {
-    const [expandedSections, setExpandedSections] = useState({
+    const [expandedSections, setExpandedSections] = useState<ExpandedSections>({
         expressions: true,
         notes: true,
         about: true,
         proverbes: true,
     });
 
-    const toggleSection = (section) => {
+    const toggleSection = (section: keyof ExpandedSections) => {
         setExpandedSections(prev => ({
             ...prev,
             [section]: !prev[section],
