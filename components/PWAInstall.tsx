@@ -1,12 +1,18 @@
-// app/components/PWAInstall.js
+// components/PWAInstall.tsx
 'use client';
 
 import React, { useState, useEffect } from 'react';
 
+// Définition du type pour l'événement beforeinstallprompt
+interface BeforeInstallPromptEvent extends Event {
+  prompt: () => Promise<void>;
+  userChoice: Promise<{ outcome: 'accepted' | 'dismissed'; platform: string }>;
+}
+
 export default function PWAInstall() {
-  const [deferredPrompt, setDeferredPrompt] = useState(null);
-  const [showInstall, setShowInstall] = useState(false);
-  const [isDevelopment, setIsDevelopment] = useState(false);
+  const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
+  const [showInstall, setShowInstall] = useState<boolean>(false);
+  const [isDevelopment, setIsDevelopment] = useState<boolean>(false);
 
   useEffect(() => {
     // Détecter si on est en développement
@@ -14,16 +20,19 @@ export default function PWAInstall() {
     setIsDevelopment(dev);
 
     // Écouter l'événement beforeinstallprompt
-    window.addEventListener('beforeinstallprompt', (e) => {
+    const handleBeforeInstallPrompt = (e: Event) => {
       e.preventDefault();
-      setDeferredPrompt(e);
+      setDeferredPrompt(e as BeforeInstallPromptEvent);
       setShowInstall(true);
-    });
+    };
 
-    window.addEventListener('appinstalled', () => {
+    const handleAppInstalled = () => {
       setShowInstall(false);
       console.log('PWA installée !');
-    });
+    };
+
+    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+    window.addEventListener('appinstalled', handleAppInstalled);
 
     // Si en développement, afficher un bouton de test
     if (dev) {
@@ -32,6 +41,12 @@ export default function PWAInstall() {
         setShowInstall(true);
       }, 2000);
     }
+
+    // Cleanup
+    return () => {
+      window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+      window.removeEventListener('appinstalled', handleAppInstalled);
+    };
   }, []);
 
   const handleInstall = async () => {
