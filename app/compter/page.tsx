@@ -93,7 +93,7 @@ export default function BakaComptagePage() {
         grandsNombres: true,
     });
 
-    const toggleSection = (section) => {
+    const toggleSection = (section:any) => {
         setExpandedSections(prev => ({
             ...prev,
             [section]: !prev[section]
