@@ -1,0 +1,25 @@
+<!-- Sauvegardez ce fichier sur votre bureau et ouvrez-le dans le navigateur -->
+<!DOCTYPE html>
+<html>
+<body>
+  <canvas id="c" width="512" height="512"></canvas>
+  <script>
+    const ctx = c.getContext('2d');
+    ctx.fillStyle = '#4CAF50';
+    ctx.beginPath();
+    ctx.arc(256, 256, 250, 0, Math.PI*2);
+    ctx.fill();
+    ctx.fillStyle = 'white';
+    ctx.font = 'bold 280px Arial';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('B', 256, 270);
+    c.toBlob(b => {
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(b);
+      a.download = 'logo.png';
+      a.click();
+    });
+  </script>
+</body>
+</html>
