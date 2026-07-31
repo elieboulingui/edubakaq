@@ -65,7 +65,7 @@ const nombresBaka: NombreBaka[] = [
 
     // Grands nombres
     { nombre: '10000', baka: 'mbébé', prononciation: 'MBEH-beh' },
-    { nombre: '20000', baka: 'nzinzin bode na mbébé', prononciation: 'NZEEN-zeen BOH-deh nah MBEH-beh' },
+    { nombre: '20000', baka: 'nzinzin  Pode na mbébé', prononciation: 'NZEEN-zeen BOH-deh nah MBEH-beh' },
     { nombre: '30000', baka: 'nzinzin bata na mbébé', prononciation: 'NZEEN-zeen BAH-tah nah MBEH-beh' },
     { nombre: '30001', baka: 'nzinzin bata na mbébé te pode', prononciation: 'NZEEN-zeen BAH-tah nah MBEH-beh teh POH-deh' },
     { nombre: '40000', baka: 'nzinzin bana na mbébé / mignito na mbébé', prononciation: 'NZEEN-zeen BAH-nah nah MBEH-beh / MEE-nyee-toh nah MBEH-beh' },
