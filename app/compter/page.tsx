@@ -100,15 +100,15 @@ const toggleSection = (section: keyof typeof expandedSections) => {
     }));
 };
 
-    const handleSearch = (text) => {
-        setSearchNumber(text);
-        if (text.trim() === '') {
-            setFoundNumber(null);
-            return;
-        }
-        const result = nombresBaka.find(item => item.nombre === text.trim());
-        setFoundNumber(result || null);
-    };
+  const handleSearch = (text: string) => {
+    setSearchNumber(text);
+    if (text.trim() === '') {
+        setFoundNumber(null);
+        return;
+    }
+    const result = nombresBaka.find(item => item.nombre === text.trim());
+    setFoundNumber(result || null);
+};
 
     // Filtrer les nombres par catégorie
     const chiffresBase = nombresBaka.filter(item => {
