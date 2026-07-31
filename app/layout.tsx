@@ -1,4 +1,4 @@
-// app/layout.js
+// app/layout.tsx
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     width: 'device-width',
     initialScale: 1,
     maximumScale: 1,
-    userScalable: 'no',
+    userScalable: false, // Changé de 'no' à false
   },
   appleWebApp: {
     capable: true,
