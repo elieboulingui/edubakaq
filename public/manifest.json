@@ -1,21 +1,16 @@
 {
   "name": "Dictionnaire Baka",
-  "short_name": "Baka Dict",
-  "description": "Dictionnaire, proverbes et culture de la langue Baka du Gabon",
+  "short_name": "Baka",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
+  "background_color": "#4CAF50",
   "theme_color": "#4CAF50",
-  "orientation": "portrait-primary",
-  "lang": "fr",
   "icons": [
     {
-      "src": "/images/icon.png",
+      "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiB2aWV3Qm94PSIwIDAgNTEyIDUxMiI+PHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIGZpbGw9IiM0Q0FGNTAiLz48dGV4dCB4PSIyNTYiIHk9IjMwMCIgZm9udC1zaXplPSIyMDAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC13ZWlnaHQ9ImJvbGQiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5CPC90ZXh0Pjwvc3ZnPg==",
       "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "type": "image/svg+xml",
+      "purpose": "any"
     }
-  ],
-  "categories": ["education", "books", "reference"],
-  "prefer_related_applications": false
+  ]
 }
