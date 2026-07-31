@@ -1,11 +1,18 @@
-// app/apprendre-compter-baka/page.js
+// app/apprendre-compter-baka/page.tsx
 'use client';
 
 import React, { useState } from 'react';
 import BottomMenu from '@/components/BottomMenu';
 
+// 👉 Type pour les nombres Baka
+type NombreBaka = {
+    nombre: string;
+    baka: string;
+    prononciation: string;
+};
+
 // 👉 Données pour apprendre à compter en Baka
-const nombresBaka = [
+const nombresBaka: NombreBaka[] = [
     // Chiffres simples (1-9)
     { nombre: '1', baka: 'pode', prononciation: 'POH-deh' },
     { nombre: '2', baka: 'bide', prononciation: 'BEE-deh' },
@@ -66,7 +73,7 @@ const nombresBaka = [
 ];
 
 // Nombres en lettres en français
-const nombresEnLettres = {
+const nombresEnLettres: { [key: string]: string } = {
     '1': 'un', '2': 'deux', '3': 'trois', '4': 'quatre', '5': 'cinq',
     '6': 'six', '7': 'sept', '8': 'huit', '9': 'neuf', '10': 'dix',
     '11': 'onze', '12': 'douze', '13': 'treize', '14': 'quatorze', '15': 'quinze',
@@ -82,8 +89,8 @@ const nombresEnLettres = {
 };
 
 export default function BakaComptagePage() {
-    const [searchNumber, setSearchNumber] = useState('');
-    const [foundNumber, setFoundNumber] = useState(null);
+    const [searchNumber, setSearchNumber] = useState<string>('');
+    const [foundNumber, setFoundNumber] = useState<NombreBaka | null>(null);
     const [expandedSections, setExpandedSections] = useState({
         compteur: true,
         chiffresBase: true,
@@ -93,22 +100,22 @@ export default function BakaComptagePage() {
         grandsNombres: true,
     });
 
-const toggleSection = (section: keyof typeof expandedSections) => {
-    setExpandedSections(prev => ({
-        ...prev,
-        [section]: !prev[section]
-    }));
-};
+    const toggleSection = (section: keyof typeof expandedSections) => {
+        setExpandedSections(prev => ({
+            ...prev,
+            [section]: !prev[section]
+        }));
+    };
 
-  const handleSearch = (text: string) => {
-    setSearchNumber(text);
-    if (text.trim() === '') {
-        setFoundNumber(null);
-        return;
-    }
-    const result = nombresBaka.find(item => item.nombre === text.trim());
-    setFoundNumber(result || null);
-};
+    const handleSearch = (text: string) => {
+        setSearchNumber(text);
+        if (text.trim() === '') {
+            setFoundNumber(null);
+            return;
+        }
+        const result = nombresBaka.find(item => item.nombre === text.trim());
+        setFoundNumber(result || null);
+    };
 
     // Filtrer les nombres par catégorie
     const chiffresBase = nombresBaka.filter(item => {
