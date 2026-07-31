@@ -1,11 +1,15 @@
-self.addEventListener('install', () => {
+self.addEventListener('install', (event) => {
+  console.log('Service Worker installé');
   self.skipWaiting();
 });
 
-self.addEventListener('activate', () => {
+self.addEventListener('activate', (event) => {
+  console.log('Service Worker activé');
   self.clients.claim();
 });
 
-self.addEventListener('fetch', (e) => {
-  e.respondWith(fetch(e.request));
+self.addEventListener('fetch', (event) => {
+  event.respondWith(fetch(event.request).catch(() => {
+    return new Response('Mode hors-ligne');
+  }));
 });
