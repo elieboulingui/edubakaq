@@ -8,13 +8,20 @@ export const metadata: Metadata = {
   title: "Dictionnaire Baka",
   description: "Dictionnaire et culture de la langue Baka du Gabon",
   manifest: "/manifest.json",
+
   verification: {
-    google: "v3gxnhywXKLvvbYWg3rlT-JVpYbCAqoaNAtruFpwY8o",
+    google: "nWKNTthDbqgzb5i8-2pvmlFZ5Di1cJ6HUrpCAng14vM",
   },
+
   appleWebApp: {
     capable: true,
     title: "Dictionnaire Baka",
     statusBarStyle: "default",
+  },
+
+  icons: {
+    icon: "/icons/icon-192x192.png",
+    apple: "/icons/icon-192x192.png",
   },
 };
 
@@ -41,9 +48,17 @@ export default function RootLayout({
           name="apple-mobile-web-app-title"
           content="Dictionnaire Baka"
         />
+
+        {/* Vérification Google Search Console */}
+        <meta
+          name="google-site-verification"
+          content="nWKNTthDbqgzb5i8-2pvmlFZ5Di1cJ6HUrpCAng14vM"
+        />
       </head>
+
       <body className="min-h-screen flex flex-col">
         {children}
+
         <BottomMenu />
         <PWAInstall />
 
@@ -51,9 +66,12 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: `
               if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.register('/sw.js')
-                  .then(() => console.log('Service Worker enregistré'))
-                  .catch(err => console.log('Erreur SW :', err));
+                window.addEventListener('load', () => {
+                  navigator.serviceWorker
+                    .register('/sw.js')
+                    .then(() => console.log('Service Worker enregistré'))
+                    .catch((err) => console.log('Erreur SW :', err));
+                });
               }
             `,
           }}
