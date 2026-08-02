@@ -8,35 +8,38 @@ import React from 'react';
 const BottomMenu = () => {
     const pathname = usePathname();
 
-    const menuItems = [
-        {
-            id: 1,
-            label: 'Accueil',
-            icon: '🏠',
-            href: '/'
-        },
-      
-        {
-            id: 3,
-            label: 'Compter',
-            icon: '🔢',
-            href: '/compter'
-        },
-        {
-            id: 4,
-            label: 'Expressions',
-            icon: '💬',
-            href: '/proverbe'
-        },
-       
-        {
-            id: 6,
-            label: 'Culture',
-            icon: '🌍',
-            href: '/Culture'
-        },
-    ];
-
+ const menuItems = [
+    {
+        id: 1,
+        label: 'Accueil',
+        icon: '🏠',
+        href: '/'
+    },
+    {
+        id: 2,
+        label: 'Culture',
+        icon: '🌍',
+        href: '/Culture'
+    },
+    {
+        id: 3,
+        label: 'Histoire',
+        icon: '📜',
+        href: '/histoire'
+    },
+    {
+        id: 4,
+        label: 'Compter',
+        icon: '🔢',
+        href: '/compter'
+    },
+    {
+        id: 5,
+        label: 'Proverbe',
+        icon: '💬',
+        href: '/proverbe'
+    },
+];
     // Filtrer les éléments pour n'afficher que ceux qui ont un href valide
     const validMenuItems = menuItems.filter(item => item.href);
 
