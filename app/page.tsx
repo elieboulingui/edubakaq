@@ -306,9 +306,9 @@ export default function DictionnaireBaka() {
   ];
 
   const phrases: DictionnaireEntry[] = [
-    { francais: "bonjour (général)", baka: "Méfoukwe", phonetique: "mefukwɛ" },
-    { francais: "bonjour (je te dis)", baka: "Me broukwe", phonetique: "mɛ brukwɛ" },
-    { francais: "bonjour (je vous dis)", baka: "Yi à Djoukwe", phonetique: "ji a dʒukwɛ" },
+    { francais: "bonjour (général)", baka: "Méfoukwe", phonetique: "yi djoukwè" },
+    { francais: "bonjour (je te dis)", baka: "Me broukwe", phonetique: "Mo djoukwè" },
+    { francais: "bonjour (je vous dis)", baka: "Yi à Djoukwe", phonetique: "Me djoukwè" },
     { francais: "tu as bien dormi ?", baka: "Mo nué Ala", phonetique: "mɔ nwe ala" },
     { francais: "vous avez bien dormi ?", baka: "Yi nué Ala", phonetique: "ji nwe ala" },
     { francais: "ils ont bien dormi", baka: "O nué Ala", phonetique: "ɔ nwe ala" },
