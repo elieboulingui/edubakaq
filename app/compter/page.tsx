@@ -2,7 +2,6 @@
 'use client';
 
 import React, { useState } from 'react';
-import BottomMenu from '@/components/BottomMenu';
 
 // 👉 Type pour les nombres Baka
 type NombreBaka = {
@@ -419,7 +418,6 @@ export default function BakaComptagePage() {
             </div>
 
             {/* Menu de navigation en bas */}
-            <BottomMenu />
         </>
     );
 }
