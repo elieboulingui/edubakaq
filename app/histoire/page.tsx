@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import BottomMenu from '@/components/BottomMenu';
 
 // Définition des types
 type ExpandedSections = {
@@ -793,7 +792,6 @@ const BakaCulturePage = () => {
             </Modal>
 
             {/* Menu de navigation en bas */}
-            <BottomMenu />
         </>
     );
 };
