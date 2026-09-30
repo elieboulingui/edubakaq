@@ -3,7 +3,6 @@
 
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import BottomMenu from '@/components/BottomMenu';
 
 // Images pour le Carousel Hero
 const HERO_IMAGES = [
@@ -208,7 +207,7 @@ export default function DictionnaireBaka() {
       </div>
 
       {/* Menu de navigation mobile en bas */}
-      <BottomMenu />
+
     </>
   );
 }
