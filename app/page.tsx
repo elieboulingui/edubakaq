@@ -97,7 +97,7 @@ export default function DictionnaireBaka() {
               <div className="bg-stone-950/60 border border-stone-800/80 rounded-2xl p-6 flex flex-col items-center text-center">
                 <div className="w-20 h-20 relative rounded-full overflow-hidden mb-4 border-2 border-emerald-500/40">
                   <Image
-                    src="/images/initiateur.jpeg"
+                    src="/images/lumier.jpeg"
                     alt="Initiateur du projet"
                     fill
                     className="object-cover"
@@ -114,7 +114,7 @@ export default function DictionnaireBaka() {
               <div className="bg-stone-950/60 border border-stone-800/80 rounded-2xl p-6 flex flex-col items-center text-center">
                 <div className="w-20 h-20 relative rounded-full overflow-hidden mb-4 border-2 border-emerald-500/40">
                   <Image
-                    src="/images/developer.jpeg"
+                    src="/images/josue.jpeg"
                     alt="Développeur de l'application"
                     fill
                     className="object-cover"
