@@ -1,8 +1,6 @@
 // app/layout.tsx
 import type { Metadata } from "next";
 import "./globals.css";
-import BottomMenu from "@/components/BottomMenu";
-import PWAInstall from "@/components/PWAInstall";
 
 export const metadata: Metadata = {
   title: "Dictionnaire Baka",
@@ -58,24 +56,6 @@ export default function RootLayout({
 
       <body className="min-h-screen flex flex-col">
         {children}
-
-        <BottomMenu />
-        <PWAInstall />
-
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              if ('serviceWorker' in navigator) {
-                window.addEventListener('load', () => {
-                  navigator.serviceWorker
-                    .register('/sw.js')
-                    .then(() => console.log('Service Worker enregistré'))
-                    .catch((err) => console.log('Erreur SW :', err));
-                });
-              }
-            `,
-          }}
-        />
       </body>
     </html>
   );
