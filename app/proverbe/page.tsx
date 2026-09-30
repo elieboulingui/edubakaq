@@ -2,7 +2,6 @@
 'use client';
 
 import React, { useState } from 'react';
-import BottomMenu from '@/components/BottomMenu';
 
 // Définition des types
 type ExpressionBaka = {
@@ -298,7 +297,7 @@ export default function BakaNotesPage() {
                     )}
                 </div>
             </div>
-            <BottomMenu />
+    
         </div>
     );
 }
