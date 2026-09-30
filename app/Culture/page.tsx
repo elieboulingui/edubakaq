@@ -3,7 +3,6 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
-import BottomMenu from '@/components/BottomMenu';
 
 const BakaRitesPage = () => {
     const [isCreditsVisible, setIsCreditsVisible] = useState(false);
@@ -209,7 +208,6 @@ const BakaRitesPage = () => {
             </div>
 
             {/* Menu de navigation en bas */}
-            <BottomMenu />
         </>
     );
 };
