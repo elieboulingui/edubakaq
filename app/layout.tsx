@@ -3,17 +3,13 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Dictionnaire Baka",
-  description: "Dictionnaire et culture de la langue Baka du Gabon",
+  title: "Web Search Aggregator",
+  description: "Moteur de recherche et agrégation d’informations sur le web",
   manifest: "/manifest.json",
-
-  verification: {
-    google: "nWKNTthDbqgzb5i8-2pvmlFZ5Di1cJ6HUrpCAng14vM",
-  },
 
   appleWebApp: {
     capable: true,
-    title: "Dictionnaire Baka",
+    title: "Web Search Aggregator",
     statusBarStyle: "default",
   },
 
@@ -32,7 +28,7 @@ export default function RootLayout({
     <html lang="fr">
       <head>
         <link rel="manifest" href="/manifest.json" />
-        <meta name="theme-color" content="#4CAF50" />
+        <meta name="theme-color" content="#06b6d4" />
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
@@ -44,13 +40,7 @@ export default function RootLayout({
         />
         <meta
           name="apple-mobile-web-app-title"
-          content="Dictionnaire Baka"
-        />
-
-        {/* Vérification Google Search Console */}
-        <meta
-          name="google-site-verification"
-          content="nWKNTthDbqgzb5i8-2pvmlFZ5Di1cJ6HUrpCAng14vM"
+          content="Web Search Aggregator"
         />
       </head>
 
