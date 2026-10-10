@@ -11,10 +11,8 @@ const HERO_IMAGES = [
   { src: '/images/hero3.jpeg', alt: 'Patrimoine linguistique Gabonais' },
 ];
 
-// Fichier APK situé dans le dossier /public
-// (C:\Users\HP\edubakaq\public\application-0c382252-7ded-478f-b026-9da09562bcca.apk)
-const APK_URL = '/application-0c382252-7ded-478f-b026-9da09562bcca.apk';
-const APK_FILENAME = 'dictionnaire-baka.apk';
+// Lien direct de téléchargement sur Expo
+const EXPO_BUILD_URL = 'https://expo.dev/accounts/boulingui/projects/edubaka/builds/bd4a35ff-6e89-4863-8039-058e1382f85b';
 
 export default function DictionnaireBaka() {
   const [currentSlide, setCurrentSlide] = useState<number>(0);
@@ -67,8 +65,9 @@ export default function DictionnaireBaka() {
             {/* BOUTON DE TÉLÉCHARGEMENT */}
             <div className="flex flex-col items-center gap-2 mb-8">
               <a
-                href={APK_URL}
-                download={APK_FILENAME}
+                href={EXPO_BUILD_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-emerald-500 hover:bg-emerald-400 text-stone-950 font-bold text-base sm:text-lg shadow-lg shadow-emerald-500/30 transition-all hover:scale-105 active:scale-95"
               >
                 <svg
@@ -89,7 +88,7 @@ export default function DictionnaireBaka() {
                 Télécharger l&apos;application
               </a>
               <span className="text-xs text-emerald-100/70">
-                Android (APK) • Gratuit
+                Android (APK) • Gratuit via Expo
               </span>
               <span className="text-[11px] text-emerald-100/50 max-w-xs">
                 Autorisez l&apos;installation depuis des sources inconnues si Android vous le demande.
@@ -227,8 +226,9 @@ export default function DictionnaireBaka() {
             {/* Second bouton de téléchargement */}
             <div className="mt-6 text-center">
               <a
-                href={APK_URL}
-                download={APK_FILENAME}
+                href={EXPO_BUILD_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm transition-colors"
               >
                 📲 Télécharger le dictionnaire sur Android
